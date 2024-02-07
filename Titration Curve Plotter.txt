@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def titration_curve(V0, Va, Ca, Cb):
+    Vb = V0 - Va
+    n = Vb * Cb
+    pH_values = []
+    for i in range(Va.size):
+        OH = n / (Va[i] + Vb)
+        pH = 14 + math.log10(OH)
+        pH_values.append(pH)
+    return pH_values
+
+# Example usage:
+V0 = 50  # Total volume (mL)
+Va = np.linspace(0, 50, 100)  # Volume of titrant added (mL)
+Ca = 0.1  # Concentration of acid (M)
+Cb = 0.1  # Concentration of base (M)
+pH_values = titration_curve(V0, Va, Ca, Cb)
+plt.plot(Va, pH_values)
+plt.xlabel('Volume of Titrant Added (mL)')
+plt.ylabel('pH')
+plt.title('Titration Curve')
+plt.grid(True)
+plt.show()
